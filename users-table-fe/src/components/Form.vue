@@ -1,20 +1,50 @@
+<script>
+import { createUser } from '../api/users';
+
+export default {
+  data() {
+    return {
+      name: '',
+      surname: '',
+      email: '',
+      phone: '',
+      data: {},
+      isOpen: true
+    }
+  },
+  emits:['update', 'open'],
+  methods: {
+    handleSubmit() {
+      createUser(this.name, this.surname, this.email, this.phone)
+        .then(({ data }) => {
+          console.log(data);
+          this.data = data;
+          this.isOpen = false;
+          this.$emit('open', this.isOpen);
+          this.$emit('update', this.data);
+        })
+    },
+  }
+}
+</script>
+
 <template>
-    <form class="row g-3 form">
+    <form class="row g-3 form" @submit.prevent="handleSubmit">
       <div class="col-md-6">
         <label for="inputEmail4" class="form-label">First Name</label>
-        <input type="text" class="form-control" required>
+        <input type="text" class="form-control" v-model="name" required>
       </div>
       <div class="col-md-6">
         <label for="inputPassword4" class="form-label">Last name</label>
-        <input type="text" class="form-control" required>
+        <input type="text" class="form-control" v-model="surname" required>
       </div>
       <div class="col-12">
         <label for="inputAddress" class="form-label">Email</label>
-        <input type="email" class="form-control" id="inputEmail4" required>
+        <input type="email" class="form-control" id="inputEmail4" v-model="email" required>
       </div>
       <div class="col-12">
         <label for="inputAddress2" class="form-label">Phone</label>
-        <input type="number" class="form-control" required>
+        <input type="number" class="form-control" v-model="phone" required>
       </div>
       <div class="col-12">
         <button type="submit" class="btn btn-primary">Sign in</button>

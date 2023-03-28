@@ -7,6 +7,7 @@ export default {
   data() {
     return {
       isOpenForm: false,
+      user:{}
     }
   },
   components: {
@@ -22,8 +23,8 @@ export default {
   </header>
 
   <main>
-    <UsersTable v-if="!isOpenForm" @open="isOpenForm=$event"/>
-    <Form v-if="isOpenForm"/>
+    <UsersTable v-if="!isOpenForm" @open="isOpenForm=$event" > :newUser="user" </UsersTable>
+    <Form v-if="isOpenForm" @update="user=$event" @open="isOpenForm=$event"/>
   </main>
 </template>
 
