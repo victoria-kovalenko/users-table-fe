@@ -1,15 +1,49 @@
 <script>
+import { getUsers } from '../api/users';
+import Loader from './Loader.vue';
+
 export default {
+  components: {
+    Loader
+  },
   data() {
     return {
-      columnsName: ['#','UserName', 'Email', 'PhoneNumber', 'Events Count', 'Next Event Date']
+      isLoading: true,
+      columnsName: ['#','UserName', 'Email', 'PhoneNumber', 'Events Count', 'Next Event Date'],
+      users: [],
+      isOpenForm: false,
     }        
+  },
+ async mounted() {
+    await getUsers()
+      .then(({data}) => {
+        this.users = data;
+        console.log(data);
+        this.isLoading = false;
+      })
+  },
+ emits: ['open'],
+  methods: {
+    openForm() {
+      this.isOpenForm = true;
+      this.$emit('open', this.isOpenForm)
+    }
   }
 }
 </script>
 
 <template>
-  <div class="table-container">
+  <Loader v-if="isLoading"/>
+  <button 
+        type="submit" 
+        class="btn btn-secondary btn-lg"
+        v-if="!isOpenForm && !isLoading"
+        @click="openForm"
+      >
+        Add User
+      </button>
+
+  <div class="table-container" v-if="!isLoading">
     <table class="table table-hover table-bordered ">
       <thead>
         <tr>
@@ -17,22 +51,13 @@ export default {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
+        <tr v-for="user of users">
+          <th scope="row">{{ user.id }}</th>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+          <td>{{ user.count }}</td>
+          <td>{{ user.next }}</td>
         </tr>
       </tbody>
     </table>
