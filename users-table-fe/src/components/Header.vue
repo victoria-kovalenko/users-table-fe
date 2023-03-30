@@ -8,8 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-link active" aria-current="page" href="https://www.linkedin.com/in/viktoriia-kovalenko-3ba230263">LinkedIn</a>
-            <a class="nav-link" href="#">GitHub</a>
-            <a class="nav-link" href="#">Pricing</a>
+            <a class="nav-link" href="https://github.com/victoria-kovalenko">GitHub</a>
           </div>
         </div>
       </div>
