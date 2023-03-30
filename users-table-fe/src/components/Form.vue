@@ -17,7 +17,6 @@ export default {
     handleSubmit() {
       createUser(this.name, this.surname, this.email, this.phone)
         .then(({ data }) => {
-          console.log(data);
           this.data = data;
           this.isOpen = false;
           this.$emit('open', this.isOpen);
@@ -48,7 +47,7 @@ export default {
       </div>
       <div class="col-12">
         <label for="inputAddress2" class="form-label">Phone</label>
-        <input type="number" class="form-control" v-model="phone" required>
+        <input type="tel" class="form-control" v-model="phone" required>
       </div>
       <div class="col-12 display">
         <button type="button" class="btn btn-primary" data-bs-dismiss="form" aria-label="Close" @click="close">Close</button>

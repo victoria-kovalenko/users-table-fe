@@ -33,7 +33,6 @@ export default {
     methods: {
         resetUser() {
             this.user = [];
-            console.log(this.user)
             this.$emit('reset', this.currentUserId);
             this.$emit('close', false);
         },
@@ -47,7 +46,6 @@ export default {
         handleSubmit() {
             updateUser(this.title, this.description, this.start, this.end, this.userId)
                 .then(({ data }) => {
-                    console.log('ok');
                     this.isLoading = true;
                     this.resetUser();
                 })
@@ -57,8 +55,7 @@ export default {
 </script>
 
 <template>
-    <form v-if="userId">
-    <div class="modal" id="modal" tabindex="-1" v-for="info of user">
+    <div v-if="userId" class="modal" id="modal" tabindex="-1" v-for="info of user">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -96,7 +93,6 @@ export default {
         </div>
       </div>
     </div>
-    </form>
 
     <Loader v-if="isLoading"/>
 </template>

@@ -2,6 +2,7 @@
 import UsersTable from './components/UsersTable.vue';
 import Form from './components/Form.vue';
 import Header from './components/Header.vue';
+import '@fortawesome/fontawesome-free/css/all.css';
 
 export default {
   data() {
@@ -23,7 +24,7 @@ export default {
    <Header/>
   </header>
 
-  <main>
+  <main class="main-container">
     <UsersTable v-if="!isOpenForm" @open="isOpenForm=$event" > :newUser="user" </UsersTable>
     <Form v-if="isOpenForm" @update="user=$event" @open="isOpenForm=$event"/>
   </main>
