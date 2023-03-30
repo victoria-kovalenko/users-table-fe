@@ -24,12 +24,16 @@ export default {
           this.$emit('update', this.data);
         })
     },
+    close() {
+      this.isOpen = false;
+      this.$emit('open', this.isOpen);
+    }
   }
 }
 </script>
 
 <template>
-    <form class="row g-3 form" @submit.prevent="handleSubmit">
+    <form class="row g-3 form" id="form" @submit.prevent="handleSubmit">
       <div class="col-md-6">
         <label for="inputEmail4" class="form-label">First Name</label>
         <input type="text" class="form-control" v-model="name" required>
@@ -46,7 +50,8 @@ export default {
         <label for="inputAddress2" class="form-label">Phone</label>
         <input type="number" class="form-control" v-model="phone" required>
       </div>
-      <div class="col-12">
+      <div class="col-12 display">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="form" aria-label="Close" @click="close">Close</button>
         <button type="submit" class="btn btn-primary">Sign in</button>
       </div>
     </form>
@@ -59,5 +64,10 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%);
+}
+
+.display {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

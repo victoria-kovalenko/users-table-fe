@@ -1,7 +1,7 @@
 <script >
 import UsersTable from './components/UsersTable.vue';
 import Form from './components/Form.vue';
-import Loader from './components/Loader.vue';
+import Header from './components/Header.vue';
 
 export default {
   data() {
@@ -12,14 +12,15 @@ export default {
   },
   components: {
     UsersTable,
-    Form
+    Form,
+    Header
   },
 }
 </script>
 
 <template>
   <header>
-   
+   <Header/>
   </header>
 
   <main>

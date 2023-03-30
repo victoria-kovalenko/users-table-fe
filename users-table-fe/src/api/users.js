@@ -13,6 +13,10 @@ export const getUsers =  () => {
   return client.get('/users'); 
 };
 
+export const getUserById = (id) => {
+  return client.get(`/users/${id}`);
+};
+
 export const createUser = (name, lastName, email, phone) => {
   const data = {
     name,
@@ -24,4 +28,14 @@ export const createUser = (name, lastName, email, phone) => {
     id: random(16),
     ...data
   });
+};
+
+export const updateUser = (title, description, start, end, id) => {
+  const data = {
+    title,
+    description,
+    start,
+    end
+  }
+  return client.patch(`/users/${id}`, data);
 };
